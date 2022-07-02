@@ -1,5 +1,6 @@
 from scrapy import Spider
 import scrapy
+from datetime import date
 from marketScraper.items import MarketscraperItem
 from scrapy.loader import ItemLoader
 
@@ -12,7 +13,7 @@ class Precios (Spider):
     start_urls = ["https://www.cotodigital3.com.ar/sitios/cdigi/"]
 
     custom_settings = {
-        'FEED_URI': 'preciosCoto.csv',
+        'FEED_URI': 'preciosCoto.json',
         'FEED_EXPORT_ENCODING': 'utf-8'
     }
 
@@ -21,12 +22,13 @@ class Precios (Spider):
         urls = response.xpath(
             '//div[@class="g1"]/ul[@class="sub_category"]/li/h2/a/@href').getall()
         BASE_URL = "https://www.cotodigital3.com.ar/"
-        for url in urls[0:1]:
+        for url in urls[0:2]:
             yield scrapy.Request(BASE_URL + url, callback=self.parse_urls)
 
     # Primera pagina
     def parse_urls(self, response):
 
+        
         # Xpath para precios, nombres y categoria
         categoria = response.xpath('/html/head/title/text()').extract()
         precios = response.xpath(
@@ -48,13 +50,10 @@ class Precios (Spider):
     # Paginas siguientes a la primera
     def parse_next_pages(self, response, **kwargs):
         # crea una lista de categorias de la misma len de nombre y precios
-        def create_categories_list():
-            return [categoria[0] for i in range(len(nombres)) ]
+        def create_list(item):
+            return [item for i in range(len(nombres)) ]         
 
-
-            
-
-
+        today = date.today()
         # recibe lo obtenido de la primer pagina
         if kwargs:
             precios = kwargs['precios']
@@ -80,7 +79,8 @@ class Precios (Spider):
         else:
             # cunado no hay mas paginas, se carga lo encontrado y se lo guarda en item para el postprocesado
             loader = ItemLoader(item=MarketscraperItem())
-            loader.add_value('categoria', create_categories_list())
+            loader.add_value("date",create_list(today))
+            loader.add_value('categoria', create_list(categoria[0]))
             loader.add_value('nombres', nombres)
             loader.add_value('precios', precios)
             yield loader.load_item()

@@ -38,6 +38,7 @@ def cleanBancos(x):
 
 
 class MarketscraperItem(Item):
+    date = Field()
     categoria = Field()
     nombres = Field(input_processor=MapCompose(str.strip))
     precios = Field(input_processor=MapCompose(str.strip, filter_none))
