@@ -56,7 +56,9 @@ class Arbol(Spider):
             yield scrapy.Request(url=url,callback=self.parseUrl)
     
     def parseUrl(self,response):
-        result = json.loads(response.body)
+        result = json.loads(response)
+        
         yield {
             "result":result
         } 
+

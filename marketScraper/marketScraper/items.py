@@ -10,6 +10,7 @@ def arreglo(x):
 def filter_none(x):
     if x:
         return x
+    
 
 
 def clean_numbers(x):
@@ -33,15 +34,11 @@ def cleanBancos(x):
             x = dic[key]
     return x
 
-
-
-
-
 class MarketscraperItem(Item):
     date = Field()
     categoria = Field()
     nombres = Field(input_processor=MapCompose(str.strip))
-    precios = Field(input_processor=MapCompose(str.strip, filter_none))
+    precios = Field(input_processor=MapCompose(str.strip,filter_none))
 
 
 class DiscountItem(Item):
