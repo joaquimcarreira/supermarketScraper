@@ -15,7 +15,7 @@ class Ofertas(Spider):
 
     def start_requests(self):
         urls = [
-            'https://www.cotodigital3.com.ar/sitios/cdigi/browse/categoria-ofertas/_/N-16uyom2#'
+            'https://www.cotodigital3.com.ar/sitios/cdigi/browse/ofertas-exclusivas/_/N-1nx2iz5'
         ]
 
         for url in urls:
@@ -33,10 +33,23 @@ class Ofertas(Spider):
         nombres = response.xpath(
             '//div[starts-with(@id,"descrip_full")]/text()').getall()
 
-        current_page = int(response.xpath(
-            '//ul[@id="atg_store_pagination"]/li/a[@class="disabledLink"]/text()').get())
-        next_page = response.xpath(
-            f'//ul[@id="atg_store_pagination"]/li/a[text()[contains(.,{current_page + 1})]]/@href').get()
+        
+        def get_current_page():
+            try:
+                current_page = int(response.xpath(
+                    '//ul[@id="atg_store_pagination"]/li/a[@class="disabledLink"]/text()').get())
+                return current_page
+            except TypeError:                
+                return None
+        def get_next_page():
+            
+            current_page = get_current_page()  
+            if current_page:
+                next_page = response.xpath(
+                    f'//ul[@id="atg_store_pagination"]/li/a[text()[contains(.,{current_page + 1})]]/@href').get()
+                return next_page
+            else:
+                return None 
 
         meta = {
             'cantUnidades': cantUnidades,
@@ -44,7 +57,7 @@ class Ofertas(Spider):
             'precios': precios,
             'nombres': nombres
         }
-
+        next_page = get_next_page()
         if next_page:
             yield response.follow(next_page, callback=self.parseDiscountNextPage, cb_kwargs=meta)
 

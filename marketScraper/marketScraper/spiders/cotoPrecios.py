@@ -29,8 +29,9 @@ class Precios (Spider):
 
     # Primera pagina
     def parse_urls(self, response):
+        today = date.today()
 
-        def create_list(self,item):
+        def create_list(item):
             return [item for i in range(len(nombres)) ]
         # Xpath para precios, nombres y categoria
         categoria = response.xpath('/html/head/title/text()').getall()
