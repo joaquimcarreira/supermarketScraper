@@ -1,4 +1,3 @@
-from venv import create
 from scrapy import Spider
 import scrapy
 from datetime import date
@@ -39,7 +38,7 @@ class Precios (Spider):
             '//div[@class="leftList"]/span[@class="atg_store_productPrice"]/span[@class="atg_store_newPrice"]/text()').getall()
         nombres = response.xpath(
             '//div[starts-with(@id,"descrip_full")]/text()').getall()
-
+        price_found = response
         # Encuentra la pagina actualz
         current_page = int(response.xpath(
             '//ul[@id="atg_store_pagination"]/li/a[@class="disabledLink"]/text()').get())
