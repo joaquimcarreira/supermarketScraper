@@ -23,7 +23,7 @@ class Precios (Spider):
         urls = response.xpath(
             '//div[@class="g1"]/ul[@class="sub_category"]/li/h2/a/@href').getall()
         BASE_URL = "https://www.cotodigital3.com.ar/"
-        for url in urls[0:15]:
+        for url in urls:
             yield scrapy.Request(BASE_URL + url, callback=self.parse_urls)
 
     # Primera pagina
