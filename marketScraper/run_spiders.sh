@@ -1,9 +1,10 @@
 #!/bin/bash
-
+#change the env
 source /home/joaquim/miniconda3/bin/activate market_scraper
-
-scrapy crawl preciosCoto
-
+#call the spiders 
+scrapy crawl dataJumbo
+scrapy crawl dataCoto
+#run the scrip to post process data obtained
 python marketScraper/postProcessing.py
 
 
