@@ -1,12 +1,11 @@
 # marketScraper
-Dada la inflacion actual en Argnetina, me senti motivado en construir una herramienta que permita tener acceso rapido y facil a los precios de los productos en distintos supermercados. 
+###Given the current inflation in Argentina, I felt motivated to build a tool that allows quick and easy access to the prices of products in different supermarkets.
 
-Esta aplicacion scrapea el ecommerce de los supermercados Coto y Jumbo, obteniendo el nombre del producto, su precio y a que categoria corresponde. Tambien se le adiere la fecha de obtencion para tener un registro historico de precios.
-Para contruirla, utilice Python y la libreria Scrapy, que me permite tener un entorno ordenado para futuras ampliaciones de la aplicacion. El metodo de obtencion de los datos es distinta para cada supermercado. Para Coto utilice 
-principalmente Xpath para encontrar los elementos html de las paginas. En el caso de Jumbo, logre encontrar los links de request para obtener los datos directamente desde el backend, siendo el principal desafio encontrar los ids de los 
-productos y la estructura arbolea de los mismos con sus respectivas categorias y sub-categorias.
-A su vez, la aplicacion cuenta con un pequeño post procesado que transforma los datos en un formato conveniente para realizar analisis de mercado.
+This application scrapes the ecommerce of the Coto and Jumbo supermarkets, obtaining the name of the product, its price and which category it corresponds to. The date of obtaining is also added to have a historical record of prices.
+To build it, I used Python and the Scrapy library, which allows me to have an organized environment for future extensions of the application. The method of obtaining data is different for each supermarket. For Coto I mainly used XPath to find the html elements of the pages. In the case of Jumbo, I managed to find the request links to obtain the data directly from the backend, the main challenge being finding the ids of the
+products and their tree structure with their respective categories and sub-categories.
+In turn, the application has a small post processing that transforms the data into a convenient format for carrying out market analysis.
 
-La aplicacion se inicia ejecutando un archivo bash
+The application is started by running a bash file
 
-Aprendi como utilizar xpath y como funciona el backend de los ecommerce. Tambien gane experiencia en el framework scrapy. 
+I learned how to use xpath and how the ecommerce backend works. I also gained experience in the scrapy framework.
