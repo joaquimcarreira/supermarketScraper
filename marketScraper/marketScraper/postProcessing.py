@@ -43,14 +43,15 @@ class PostProcess():
         #delete the original data after process
         if delete==True:
             os.remove(self.path)
-PATH_COTO = "/home/joaquim/projectos/marketScraper/marketScraper/dataCoto.json"
-OUTPATH_COTO = "/home/joaquim/projectos/marketScraper/marketScraper/marketScraper/data/dataCOTO.json"
+PATH_COTO = "../marketScraper/dataCoto.json"
+OUTPATH_COTO = "../marketScraper/marketScraper/data/dataCOTO.json"
 procesoCoto = PostProcess(path=PATH_COTO,output_path=OUTPATH_COTO,supermarket="coto")
-procesoCoto.process(delete=True)
-path_JUMBO = "/home/joaquim/projectos/marketScraper/marketScraper/dataJumbo.json"
-OUTPATH_JUMBO = "/home/joaquim/projectos/marketScraper/marketScraper/marketScraper/data/dataJUMBO.json"
+#procesoCoto.process(delete=True)
+path_JUMBO = "../marketScraper/dataJumbo.json"
+OUTPATH_JUMBO = "../marketScraper/marketScraper/data/dataJUMBO.json"
 procesoJumbo = PostProcess(path=path_JUMBO,output_path=OUTPATH_JUMBO,supermarket="jumbo")
 procesoJumbo.process(delete=True)
+
 
     
 

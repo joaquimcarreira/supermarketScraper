@@ -1,6 +1,5 @@
 #!/bin/bash
-#change the env
-source /home/joaquim/miniconda3/bin/activate market_scraper
+
 #call the spiders 
 scrapy crawl dataJumbo
 scrapy crawl dataCoto
